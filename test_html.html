@@ -13,7 +13,7 @@
       <section data-id="start">
         <div class="slide-layout">
           <div class="slide-header"><h2>Slide 1</h2></div>
-          <div class="slide-content"><p>Test Inhalt Combination in dein Cock du schwanz</p></div>
+          <div class="slide-content"><p>Test Inhalt Version 4</p></div>
           <div class="slide-footer"><a href="#/slide2">Weiter →</a></div>
         </div>
       </section>
@@ -32,27 +32,30 @@
       </section>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-  <script>
-    Reveal.initialize({
-  width: window.innerWidth <= 1180 ? 1080 : window.innerWidth,
-  height: window.innerWidth <= 1180 ? 810 : window.innerHeight,
-  margin: 0, minScale: 1.0, maxScale: 1.0,
-  controls: false, center: false, touch: true, transition: 'none',
-  history: true,  // ← neu
-  plugins: [],
-
-});
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('a[href^="#/"]');
-      if (!link) return;
-      const id = link.getAttribute('href').slice(2);
-      const target = document.querySelector('.slides section[data-id="' + id + '"]');
-      if (!target) return;
-      e.preventDefault();
-      const indices = Reveal.getIndices(target);
-      Reveal.slide(indices.h, indices.v);
-    });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({
+    width: window.innerWidth <= 1180 ? 1080 : window.innerWidth,
+    height: window.innerWidth <= 1180 ? 810 : window.innerHeight,
+    margin: 0, minScale: 1.0, maxScale: 1.0,
+    controls: false, center: false, touch: true, transition: 'none',
+    history: true,
+    plugins: [ RevealMath.MathJax3 ],
+    math: {
+      mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+    },
+  });
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href^="#/"]');
+    if (!link) return;
+    const id = link.getAttribute('href').slice(2);
+    const target = document.querySelector('.slides section[data-id="' + id + '"]');
+    if (!target) return;
+    e.preventDefault();
+    const indices = Reveal.getIndices(target);
+    Reveal.slide(indices.h, indices.v);
+  });
+</script>
 </body>
 </html>
