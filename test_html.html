@@ -5,18 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
-      <section><h1>Slide 1</h1><a href="#/slide2">Weiter →</a></section>
-      <section data-id="slide2"><h1>Slide 2</h1><a href="#/slide3">Weiter →</a></section>
-      <section data-id="slide3"><h1>Slide 3</h1></section>
+      <section data-id="start">
+        <div class="slide-layout">
+          <div class="slide-header"><h2>Slide 1</h2></div>
+          <div class="slide-content"><p>Test Inhalt</p></div>
+          <div class="slide-footer"><a href="#/slide2">Weiter →</a></div>
+        </div>
+      </section>
+      <section data-id="slide2">
+        <div class="slide-layout">
+          <div class="slide-header"><h2>Slide 2</h2></div>
+          <div class="slide-content"><p>Test Inhalt 2</p></div>
+          <div class="slide-footer"><a href="#/slide3">Weiter →</a></div>
+        </div>
+      </section>
+      <section data-id="slide3">
+        <div class="slide-layout">
+          <div class="slide-header"><h2>Slide 3</h2></div>
+          <div class="slide-content"><p>Test Inhalt 3</p></div>
+        </div>
+      </section>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script>
-    Reveal.initialize({ touch: true, transition: 'none' });
+    Reveal.initialize({
+      width: window.innerWidth <= 1180 ? 1080 : window.innerWidth,
+      height: window.innerWidth <= 1180 ? 810 : window.innerHeight,
+      margin: 0, minScale: 1.0, maxScale: 1.0,
+      controls: false, center: false, touch: true, transition: 'none'
+    });
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a[href^="#/"]');
       if (!link) return;
