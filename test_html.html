@@ -35,11 +35,16 @@
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script>
     Reveal.initialize({
-      width: window.innerWidth <= 1180 ? 1080 : window.innerWidth,
-      height: window.innerWidth <= 1180 ? 810 : window.innerHeight,
-      margin: 0, minScale: 1.0, maxScale: 1.0,
-      controls: false, center: false, touch: true, transition: 'none'
-    });
+  width: window.innerWidth <= 1180 ? 1080 : window.innerWidth,
+  height: window.innerWidth <= 1180 ? 810 : window.innerHeight,
+  margin: 0, minScale: 1.0, maxScale: 1.0,
+  controls: false, center: false, touch: true, transition: 'none',
+  history: true,  // ← neu
+  plugins: [ RevealMath.MathJax3 ],
+  math: {
+    mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+  },
+});
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a[href^="#/"]');
       if (!link) return;
