@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section><h1>Slide 1</h1><a href="#/slide2">Weiter →</a></section>
+      <section data-id="slide2"><h1>Slide 2</h1><a href="#/slide3">Weiter →</a></section>
+      <section data-id="slide3"><h1>Slide 3</h1></section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({ touch: true, transition: 'none' });
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a[href^="#/"]');
+      if (!link) return;
+      const id = link.getAttribute('href').slice(2);
+      const target = document.querySelector('.slides section[data-id="' + id + '"]');
+      if (!target) return;
+      e.preventDefault();
+      const indices = Reveal.getIndices(target);
+      Reveal.slide(indices.h, indices.v);
+    });
+  </script>
+</body>
+</html>
