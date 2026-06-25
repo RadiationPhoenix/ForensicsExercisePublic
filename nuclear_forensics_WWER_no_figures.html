@@ -2463,10 +2463,6 @@ html { font-size: clamp(14px, 1.4vw, 28px); }
   Reveal.on('slidechanged', function(event) {
     document.querySelectorAll('.hub-card.zooming').forEach(c => c.classList.remove('zooming'));
     window.dispatchEvent(new Event('resize'));
-    const current = event.currentSlide;
-    current.style.visibility = 'visible';
-    current.style.opacity = '1';
-    current.style.display = 'block';
   });
   
   document.addEventListener('click', function(e) {
