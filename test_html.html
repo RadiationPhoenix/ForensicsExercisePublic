@@ -18,12 +18,14 @@
         </div>
       </section>
       <section data-id="slide2">
-        <div class="slide-layout">
-          <div class="slide-header"><h2>Slide 2a</h2></div>
-          <div class="slide-content"><p>Test Inhalt 2a</p></div>
-          <div class="slide-footer"><a href="#/slide3">Weiter →</a></div>
-        </div>
-      </section>
+  <div class="slide-layout">
+    <div class="slide-header"><h2>Slide 2a</h2></div>
+    <div class="slide-content">
+      <div id="test-plot" style="width:100%; height:400px;"></div>
+    </div>
+    <div class="slide-footer"><a href="#/slide3">Weiter →</a></div>
+  </div>
+</section>
       <section data-id="slide3">
         <div class="slide-layout">
           <div class="slide-header"><h2>Slide 3b</h2></div>
@@ -48,6 +50,13 @@
       mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
     },
   });
+  Reveal.on('ready', function() {
+  Plotly.newPlot('test-plot', [{
+    x: [1, 2, 3, 4],
+    y: [10, 15, 13, 17],
+    type: 'scatter'
+  }], {autosize: true});
+});
   document.addEventListener('click', function(e) {
     const link = e.target.closest('a[href^="#/"]');
     if (!link) return;
