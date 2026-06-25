@@ -54,11 +54,13 @@
       mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
     },
   });
-Reveal.on('ready', function() {
-  ['plot1','plot2','plot3','plot4'].forEach(id => {
-    Plotly.newPlot(id, [{x:[1,2,3], y:[1,2,3], type:'scatter'}], {autosize:true});
+
+  Reveal.on('ready', function() {
+    ['plot1','plot2','plot3','plot4'].forEach(id => {
+      Plotly.newPlot(id, [{x:[1,2,3], y:[1,2,3], type:'scatter'}], {autosize:true});
+    });
   });
-});
+
   document.addEventListener('click', function(e) {
     const link = e.target.closest('a[href^="#/"]');
     if (!link) return;
@@ -66,8 +68,17 @@ Reveal.on('ready', function() {
     const target = document.querySelector('.slides section[data-id="' + id + '"]');
     if (!target) return;
     e.preventDefault();
-    const indices = Reveal.getIndices(target);
-    Reveal.slide(indices.h, indices.v);
+    const card = link.classList.contains('hub-card') ? link : null;
+    const navigate = () => {
+      const indices = Reveal.getIndices(target);
+      Reveal.slide(indices.h, indices.v);
+    };
+    if (card) {
+      card.classList.add('zooming');
+      setTimeout(navigate, 340);
+    } else {
+      navigate();
+    }
   });
 </script>
 </body>
