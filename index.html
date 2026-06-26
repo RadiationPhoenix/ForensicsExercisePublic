@@ -1,102 +1,233 @@
 <!DOCTYPE html>
-        <html lang="de">
-        <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nukleare Forensik</title>
-        <style>
-            body {
-            margin: 0; padding: 40px 20px;
-            background: #0f0e0b; color: #e8e2d4;
-            font-family: 'Georgia', serif;
-            display: flex; flex-direction: column;
-            align-items: center;
-            }
-            h1 {
-            font-size: 1.8em; color: #c8a84b;
-            letter-spacing: 0.05em; margin-bottom: 0.2em;
-            }
-            p { color: #7a7265; font-size: 0.9em; margin-bottom: 2em; }
-            a { text-decoration: none; width: 100%; max-width: 400px; }
-            .card {
-            display: flex; align-items: center; gap: 16px;
-            padding: 18px 24px; margin-bottom: 12px;
-            border: 1px solid rgba(200,168,75,0.3);
-            border-radius: 6px; background: rgba(200,168,75,0.06);
-            transition: background 0.2s;
-            }
-            .card:hover { background: rgba(200,168,75,0.14); }
-            .icon  { font-size: 1.6em; }
-            .name  { flex: 1; color: #c8a84b; font-size: 1.1em; letter-spacing: 0.05em; }
-            .arrow { color: #7a7265; font-size: 1.2em; }
-        </style>
-        </head>
-        <body>
-        <h1>Nukleare Forensik</h1>
-        <p>ExPhyIV — Wähle eine Präsentation</p>
-        
-                <a href="nuclear_forensics_CANDU.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">CANDU</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_CANDU_no_figures.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">CANDU_no_figures</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_PWR.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">PWR</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_PWR_no_figures.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">PWR_no_figures</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_RBMK.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">RBMK</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_RBMK_no_figures.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">RBMK_no_figures</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_WWER.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">WWER</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                <a href="nuclear_forensics_WWER_no_figures.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">WWER_no_figures</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-                 <a href="nuclear_forensics_PWR_no_figures_short.html">
-                    <div class="card">
-                        <span class="icon">⚛</span>
-                        <span class="name">PWR_Shorts</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </a>
-        </body>
-        </html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nukleare Forensik</title>
+  <style>
+    body {
+      margin: 0; padding: 40px 20px;
+      background: #0f0e0b; color: #e8e2d4;
+      font-family: 'Georgia', serif;
+      display: flex; flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 1.8em; color: #c8a84b;
+      letter-spacing: 0.05em; margin-bottom: 0.2em;
+    }
+    p { color: #7a7265; font-size: 0.9em; margin-bottom: 2em; }
+
+    .entry {
+      width: 100%; max-width: 400px;
+      margin-bottom: 20px;
+    }
+    .entry-label {
+      font-family: monospace;
+      font-size: 0.65em;
+      color: #7a7265;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+      padding-left: 4px;
+    }
+    .entry-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    a { text-decoration: none; }
+
+    .card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 24px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      flex: 1;
+    }
+    .card.open {
+      border: 1px solid rgba(200,168,75,0.3);
+      background: rgba(200,168,75,0.06);
+    }
+    .card.open:hover { background: rgba(200,168,75,0.14); }
+
+    .card.download {
+      flex: 0 0 auto;
+      padding: 18px 20px;
+      border: 1px solid rgba(107,191,154,0.3);
+      background: rgba(107,191,154,0.05);
+    }
+    .card.download:hover { background: rgba(107,191,154,0.13); }
+
+    .icon  { font-size: 1.4em; }
+    .name  { flex: 1; color: #c8a84b; font-size: 1.0em; letter-spacing: 0.05em; }
+    .arrow { color: #7a7265; font-size: 1.2em; }
+    .dl-icon { color: #6bbf9a; font-size: 1.4em; }
+  </style>
+</head>
+<body>
+  <h1>Nukleare Forensik</h1>
+  <p>ExPhyIV — Wähle eine Präsentation</p>
+
+  <div class="entry">
+    <div class="entry-label">CANDU</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_CANDU.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_CANDU.html" download="nuclear_forensics_CANDU.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">CANDU — Ohne Figuren</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_CANDU_no_figures.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_CANDU_no_figures.html" download="nuclear_forensics_CANDU_no_figures.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">PWR</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_PWR.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_PWR.html" download="nuclear_forensics_PWR.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">PWR — Ohne Figuren</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_PWR_no_figures.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_PWR_no_figures.html" download="nuclear_forensics_PWR_no_figures.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">RBMK</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_RBMK.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_RBMK.html" download="nuclear_forensics_RBMK.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">RBMK — Ohne Figuren</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_RBMK_no_figures.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_RBMK_no_figures.html" download="nuclear_forensics_RBMK_no_figures.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">WWER</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_WWER.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_WWER.html" download="nuclear_forensics_WWER.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">WWER — Ohne Figuren</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_WWER_no_figures.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_WWER_no_figures.html" download="nuclear_forensics_WWER_no_figures.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-label">PWR — Kurzversion</div>
+    <div class="entry-buttons">
+      <a href="nuclear_forensics_PWR_no_figures_short.html" style="flex:1;">
+        <div class="card open">
+          <span class="icon">⚛</span>
+          <span class="name">Öffnen</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="nuclear_forensics_PWR_no_figures_short.html" download="nuclear_forensics_PWR_no_figures_short.html">
+        <div class="card download">
+          <span class="dl-icon">⬇</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
