@@ -1,33 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════════
    Nukleare Forensik — Theme System
-   Struktur:
-     1.  Webfonts
-     2.  Globale Variablen
-     3.  Zerfall-Themes
-     4.  Reveal.js Basis-Overrides
-     5.  Slide-Layout  (Header / Content / Footer)
-     6.  Badges
-     7.  Buttons
-     8.  Hub — Karten-Grid
-     9.  Inhalts-Layouts  (Theory, Fact-Row, Math-Box, Ref-Links)
-     10. Dossier-Karte
-     11. Aufgaben-Folien
-     12. Plotly-Container
-     13. Placeholder
-     14. Maximier-Overlay
-     15. DESKTOP-OVERRIDES  (> 1180 px)
-     16. IPAD-FIXES         (≤ 1180 px)
+   Einbinden in <head> nach reveal.css / black.css:
+     <link rel="stylesheet" href="themes.css">
    ═══════════════════════════════════════════════════════════════════ */
 
+/* ── Webfonts ──────────────────────────────────────────────────────── */
 
-/* ══════════════════════════════════════════════════════════════════
-   1. WEBFONTS
-   ══════════════════════════════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro:wght@400;600&display=swap');
 
 
 /* ══════════════════════════════════════════════════════════════════
-   2. GLOBALE BASIS-VARIABLEN
+   1. GLOBALE BASIS-VARIABLEN
    ══════════════════════════════════════════════════════════════════ */
 :root {
   /* Hintergrund & Oberflächen */
@@ -51,7 +33,7 @@
   --font-serif:  'Crimson Pro', Georgia, 'Times New Roman', serif;
   --font-mono:   'Source Code Pro', 'Courier New', monospace;
 
-  /* Theme-Fallback (neutral, überschrieben durch .theme-*) */
+  /* Theme-Fallback (neutral, überschrieben durch .theme-* ) */
   --tc:          #7a7265;
   --tc-dim:      rgba(122, 114, 101, 0.10);
   --tc-border:   rgba(122, 114, 101, 0.28);
@@ -60,23 +42,33 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   3. ZERFALL-THEMES
+   2. ZERFALL-THEMES  — eine Klasse pro <section>-Gruppe
+   ══════════════════════════════════════════════════════════════════
+
+   Verwendung im HTML:
+     <section class="theme-alpha"> … </section>
+     <section class="theme-beta">  … </section>
+     <section class="theme-gamma"> … </section>
+     <section class="theme-nr">    … </section>
+
+   Alle Komponenten greifen nur auf --tc / --tc-dim / --tc-border /
+   --tc-badge-bg zu, nie direkt auf theme-spezifische Werte.
    ══════════════════════════════════════════════════════════════════ */
 
 /* α  Alphazerfall — Gold / Bernstein */
 .theme-alpha, .reveal .slides section.theme-alpha {
   --tc:          #c8a84b;
-  --tc-dim:      rgba(200, 168,  75, 0.10);
-  --tc-border:   rgba(200, 168,  75, 0.30);
-  --tc-badge-bg: rgba(200, 168,  75, 0.08);
+  --tc-dim:      rgba(200, 168, 75, 0.10);
+  --tc-border:   rgba(200, 168, 75, 0.30);
+  --tc-badge-bg: rgba(200, 168, 75, 0.08);
 }
 
 /* β  Betazerfall — Stahlblau */
 .theme-beta, .reveal .slides section.theme-beta {
   --tc:          #5b9bd5;
-  --tc-dim:      rgba( 91, 155, 213, 0.10);
-  --tc-border:   rgba( 91, 155, 213, 0.28);
-  --tc-badge-bg: rgba( 91, 155, 213, 0.08);
+  --tc-dim:      rgba(91, 155, 213, 0.10);
+  --tc-border:   rgba(91, 155, 213, 0.28);
+  --tc-badge-bg: rgba(91, 155, 213, 0.08);
 }
 
 /* γ  Gammazerfall — Warm-Silber */
@@ -97,7 +89,7 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   4. REVEAL.JS BASIS-OVERRIDES
+   3. BASISSTILE (Reveal-Overrides)
    ══════════════════════════════════════════════════════════════════ */
 .reveal-viewport { background: var(--col-bg); }
 
@@ -106,15 +98,12 @@
   height: 100% !important;
   color: var(--col-text);
   font-family: var(--font-serif);
-   /* position: relative !important;  ← ENTFERNEN */
-  /* overflow: hidden !important;     ← ENTFERNEN */
-  box-sizing: border-box;
 }
 
 /* Überschriften */
 .reveal h1, .reveal h2, .reveal h3 {
   font-family: var(--font-serif);
-  color: var(--tc, #c8a84b);
+  color: var(--tc, #c8a84b);          /* greift auf Theme-Farbe zurück */
   text-transform: none;
   letter-spacing: 0.04em;
   font-weight: 600;
@@ -144,7 +133,7 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   5. SLIDE-LAYOUT  (Header / Content / Footer)
+   4. SLIDE-LAYOUT  (Header / Content / Footer)
    ══════════════════════════════════════════════════════════════════ */
 .slide-layout {
   display: grid;
@@ -154,9 +143,9 @@
   margin-top: var(--header-h);
 }
 
-/* Header — absolute innerhalb des Slides */
+/* Fixierter Header */
 .slide-header {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
   display: grid;
@@ -207,9 +196,9 @@
 }
 .slide-content.centered .two-col { width: 100%; }
 
-/* Footer — absolute innerhalb des Slides */
+/* Fixierter Footer */
 .slide-footer {
-  position: absolute;
+  position: fixed;
   bottom: 0; left: 0; right: 0;
   height: var(--footer-h);
   display: flex;
@@ -233,7 +222,7 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   6. BADGES
+   5. BADGES
    ══════════════════════════════════════════════════════════════════ */
 .section-badge {
   display: inline-flex;
@@ -246,19 +235,22 @@
   margin-bottom: 0.6em;
   letter-spacing: 0.12em;
   font-variant: small-caps;
+  /* text-transform: uppercase; */
+
+  /* Theme-gesteuert */
   background: var(--tc-badge-bg);
   color: var(--tc);
   border: 1px solid var(--tc-border);
 }
 
-/* Legacy-Badges */
-.badge-intro { --tc: #58a6ff; --tc-dim: rgba(88,166,255,0.10); --tc-border: rgba(88,166,255,0.30); --tc-badge-bg: rgba(88,166,255,0.08); }
-.badge-info  { --tc: #f0883e; --tc-dim: rgba(240,136,62,0.10);  --tc-border: rgba(240,136,62,0.30);  --tc-badge-bg: rgba(240,136,62,0.08); }
-.badge-wrap  { --tc: #58a6ff; --tc-dim: rgba(88,166,255,0.10); --tc-border: rgba(88,166,255,0.30); --tc-badge-bg: rgba(88,166,255,0.08); }
+/* Legacy-Badges (rückwärtskompatibel, können schrittweise entfernt werden) */
+.badge-intro  { --tc: #58a6ff; --tc-dim: rgba(88,166,255,0.10); --tc-border: rgba(88,166,255,0.30); --tc-badge-bg: rgba(88,166,255,0.08); }
+.badge-info   { --tc: #f0883e; --tc-dim: rgba(240,136,62,0.10);  --tc-border: rgba(240,136,62,0.30);  --tc-badge-bg: rgba(240,136,62,0.08); }
+.badge-wrap   { --tc: #58a6ff; --tc-dim: rgba(88,166,255,0.10); --tc-border: rgba(88,166,255,0.30); --tc-badge-bg: rgba(88,166,255,0.08); }
 
 
 /* ══════════════════════════════════════════════════════════════════
-   7. BUTTONS
+   6. BUTTONS  (nav-btn / back-btn / continue-btn)
    ══════════════════════════════════════════════════════════════════ */
 .nav-btn, .back-btn, .continue-btn {
   display: inline-block;
@@ -272,13 +264,15 @@
   letter-spacing: 0.05em;
   cursor: pointer;
   text-decoration: none;
-  border-bottom: 1px solid var(--col-border);
+  border-bottom: 1px solid var(--col-border);  /* override link style */
   transition: border-color 0.2s, color 0.2s;
 }
 .nav-btn:hover, .back-btn:hover {
   color: var(--col-text);
   border-color: var(--col-muted);
 }
+
+/* continue-btn: Theme-Akzent */
 .continue-btn {
   border-color: var(--tc-border);
   color: var(--tc);
@@ -287,6 +281,7 @@
   border-color: var(--tc);
   background: var(--tc-dim);
 }
+
 .nav-btn.accent {
   border-color: var(--tc-border);
   color: var(--tc);
@@ -294,7 +289,7 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   8. HUB — KARTEN-GRID
+   7. HUB — Karten-Grid
    ══════════════════════════════════════════════════════════════════ */
 .hub-grid {
   display: grid;
@@ -321,7 +316,7 @@
   border: 1px solid;
   cursor: pointer;
   text-decoration: none;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid;  /* override link style */
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
   align-items: center;
@@ -330,39 +325,58 @@
   box-sizing: border-box;
 }
 
+/* Alpha-Karte */
 .hub-card.alpha {
   --tc: #c8a84b; --tc-dim: rgba(200,168,75,0.10);
   --tc-border: rgba(200,168,75,0.35);
   border-color: var(--tc-border);
   background: rgba(200,168,75,0.06);
 }
-.hub-card.alpha:hover { box-shadow: 0 0 18px -4px var(--tc); background: rgba(200,168,75,0.14); }
+.hub-card.alpha:hover {
+  box-shadow: 0 0 18px -4px var(--tc);
+  background: rgba(200,168,75,0.14);
+}
 
+/* Beta-Karte */
 .hub-card.beta {
   --tc: #5b9bd5; --tc-dim: rgba(91,155,213,0.10);
   --tc-border: rgba(91,155,213,0.32);
   border-color: var(--tc-border);
   background: rgba(91,155,213,0.06);
 }
-.hub-card.beta:hover { box-shadow: 0 0 18px -4px var(--tc); background: rgba(91,155,213,0.14); }
+.hub-card.beta:hover {
+  box-shadow: 0 0 18px -4px var(--tc);
+  background: rgba(91,155,213,0.14);
+}
 
+/* Gamma-Karte */
 .hub-card.gamma {
   --tc: #d4cfc8; --tc-dim: rgba(212,207,200,0.07);
   --tc-border: rgba(212,207,200,0.22);
   border-color: var(--tc-border);
   background: rgba(212,207,200,0.04);
 }
-.hub-card.gamma:hover { box-shadow: 0 0 18px -4px var(--tc); background: rgba(212,207,200,0.10); }
+.hub-card.gamma:hover {
+  box-shadow: 0 0 18px -4px var(--tc);
+  background: rgba(212,207,200,0.10);
+}
 
+/* Kernreaktionen-Karte */
 .hub-card.nr {
   --tc: #6bbf9a; --tc-dim: rgba(107,191,154,0.10);
   --tc-border: rgba(107,191,154,0.30);
   border-color: var(--tc-border);
   background: rgba(107,191,154,0.05);
 }
-.hub-card.nr:hover { box-shadow: 0 0 18px -4px var(--tc); background: rgba(107,191,154,0.13); }
+.hub-card.nr:hover {
+  box-shadow: 0 0 18px -4px var(--tc);
+  background: rgba(107,191,154,0.13);
+}
 
-.hub-card .card-icon  { font-size: 2.8em; color: var(--tc); }
+.hub-card .card-icon {
+  font-size: 2.8em;
+  color: var(--tc);
+}
 .hub-card .card-title {
   font-family: var(--font-mono);
   font-size: 0.58em;
@@ -372,6 +386,7 @@
 }
 .hub-card .card-desc { display: none; }
 
+/* Zoom-Animation beim Klick */
 @keyframes zoomOutCard {
   0%   { transform: scale(1);    opacity: 1; }
   60%  { transform: scale(1.10); opacity: 1; }
@@ -384,7 +399,7 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   9. INHALTS-LAYOUTS
+   8. INHALTS-LAYOUTS
    ══════════════════════════════════════════════════════════════════ */
 
 /* Zweispaltig */
@@ -395,18 +410,22 @@
   align-items: center;
 }
 
-/* Theory-Layout */
+/* ── Theory-Layout: Text | Bild ─────────────────────────── */
 .theory-layout {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   gap: 24px;
   height: 100%;
 }
+
+/* Linksspalte: fact-rows + math-box + links */
 .theory-left {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
+/* Kursive Einleitung / Leitsatz */
 .theory-lead {
   font-size: 0.8em;
   font-style: italic;
@@ -415,12 +434,17 @@
   padding: 2px 0 2px 10px;
   margin-bottom: 4px;
   line-height: 1.5;
+  border-radius: 0;
 }
+
+/* Rechtsspalte: Bild + Notiz */
 .theory-right {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
+/* Hervorhebungs-Box mit Themenfarbe (z. B. forensische Relevanz) */
 .side-note {
   background: var(--tc-dim);
   border: 1px solid var(--tc-border);
@@ -438,19 +462,27 @@
   color: var(--tc);
 }
 
-/* Fact-Row */
-.fact-list { display: flex; flex-direction: column; gap: 7px; }
+
+/* ── Fact-Row ────────────────────────────────────────────── */
+.fact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 .fact-row {
   display: flex;
   align-items: flex-start;
   gap: 12px;
   padding: 9px 13px;
   border-radius: 0 4px 4px 0;
-  border-left: 2px solid var(--tc);
+  border-left: 2px solid var(--tc);       /* Theme-Akzentlinie */
   background: var(--col-surface);
   transition: background 0.15s;
 }
 .fact-row:hover { background: var(--tc-dim); }
+
+.fact-icon { font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
+
 .fact-label {
   font-family: var(--font-mono);
   font-size: 0.6em;
@@ -460,9 +492,21 @@
   letter-spacing: 0.07em;
   flex-shrink: 0;
 }
-.fact-text { font-size: 0.78em; color: var(--col-text); line-height: 1.45; }
+.fact-text {
+  font-size: 0.78em;
+  color: var(--col-text);
+  line-height: 1.45;
+}
 
-/* Math-Box */
+
+/* ── Math-Box (MathJax-Container) ───────────────────────── */
+/*
+  Verwendung:
+    <div class="math-box">
+      <div class="math-label">GEIGER-NUTTALL-GESETZ</div>
+      \[ \log T_{1/2} = \frac{a \cdot Z}{\sqrt{E_\alpha}} + b \]
+    </div>
+*/
 .math-box {
   background: var(--col-surface);
   border: 1px solid var(--tc-border);
@@ -477,14 +521,26 @@
   margin-bottom: 8px;
   opacity: 0.85;
 }
-.math-box .MathJax { color: var(--col-text) !important; }
+
+/* MathJax-Ausgabe in der Box zentriert & in Themenfarbe */
+.math-box .MathJax {
+  color: var(--col-text) !important;
+}
 .math-box mjx-container {
   display: flex !important;
   justify-content: center;
   padding: 4px 0;
 }
 
-/* Ref-Links */
+
+/* ── Ref-Links (externe Quellen am Folienboden) ──────────── */
+/*
+  Verwendung:
+    <div class="ref-links">
+      <a class="ref-link" href="https://..." target="_blank">↗ NUDAT 3.0</a>
+      <a class="ref-link" href="https://..." target="_blank">↗ Gamow-Theorie</a>
+    </div>
+*/
 .ref-links {
   display: flex;
   flex-wrap: wrap;
@@ -497,7 +553,7 @@
   font-size: 0.58em;
   color: var(--tc);
   border: 1px solid var(--tc-border);
-  border-bottom: 1px solid var(--tc-border);
+  border-bottom: 1px solid var(--tc-border);  /* override .reveal a */
   border-radius: 3px;
   padding: 3px 9px;
   text-decoration: none;
@@ -505,11 +561,14 @@
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }
-.ref-link:hover { background: var(--tc-dim); border-color: var(--tc); }
+.ref-link:hover {
+  background: var(--tc-dim);
+  border-color: var(--tc);
+}
 
 
 /* ══════════════════════════════════════════════════════════════════
-   10. DOSSIER-KARTE
+   9. DOSSIER-KARTE  (Bild + Caption)
    ══════════════════════════════════════════════════════════════════ */
 .dossier-card {
   border: 1px solid var(--col-border);
@@ -549,7 +608,7 @@
 
 
 /* ══════════════════════════════════════════════════════════════════
-   11. AUFGABEN-FOLIEN
+   10. AUFGABEN-FOLIEN  (exercise)
    ══════════════════════════════════════════════════════════════════ */
 .exercise-intro {
   font-size: 0.82em;
@@ -559,10 +618,25 @@
   background: var(--tc-dim);
   border-radius: 0 5px 5px 0;
 }
-.exercise-list { display: flex; flex-direction: column; gap: 14px; }
-.exercise-item { display: flex; flex-direction: column; gap: 5px; transition: opacity 0.3s; }
-.exercise-item.locked { opacity: 0.3; pointer-events: none; }
+
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.exercise-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: opacity 0.3s;
+}
+.exercise-item.locked {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .exercise-text { font-size: 0.8em; }
+
 .exercise-input-row {
   display: grid;
   grid-template-columns: 50% 10%;
@@ -580,19 +654,74 @@
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
-.exercise-input::placeholder { color: var(--col-muted); font-style: italic; }
-.exercise-input:focus { outline: none; border-color: var(--tc); }
-.exercise-input[readonly] { background: var(--col-surface); cursor: default; }
+.exercise-input::placeholder {
+  color: var(--col-muted);
+  font-style: italic;
+}
+.exercise-input:focus {
+  outline: none;
+  border-color: var(--tc);
+}
+.exercise-input[readonly] {
+  background: var(--col-surface);
+  cursor: default;
+}
 .exercise-input.correct   { border-color: var(--col-ok); }
 .exercise-input.incorrect { border-color: var(--col-err); }
 .exercise-check { font-size: 1.15em; text-align: center; }
 
-/* Exercise-Split */
+
+/* ══════════════════════════════════════════════════════════════════
+   11. PLOTLY-CONTAINER
+   ══════════════════════════════════════════════════════════════════ */
+.plotly-fig {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-height: 95%;
+  overflow: hidden;
+  border: 1px solid var(--tc-border);   /* Theme-Rahmen */
+  border-radius: 5px;
+  padding: 10px;
+  background: var(--col-surface);
+  box-sizing: border-box;
+}
+.plotly-fig > div,
+.plotly-fig .plotly-graph-div,
+.plotly-fig svg.main-svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   12. PLACEHOLDER
+   ══════════════════════════════════════════════════════════════════ */
+.placeholder {
+  border: 1px dashed var(--tc-border);
+  border-radius: 5px;
+  padding: 18px 20px;
+  margin-top: 1em;
+  color: var(--col-muted);
+  font-size: 0.72em;
+  font-family: var(--font-mono);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   13. GLOBALES SIZING
+   ══════════════════════════════════════════════════════════════════ */
+html { font-size: clamp(14px, 1.4vw, 28px); }
+
+/* ── Aufgaben-Split: Frage | Plot ── */
 .exercise-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100%;
 }
+
 .ex-question-col {
   padding: 16px 20px;
   border-right: 1px solid var(--col-border);
@@ -600,6 +729,7 @@
   flex-direction: column;
   gap: 14px;
 }
+
 .q-number {
   font-family: var(--font-mono);
   font-size: 2.8em;
@@ -610,6 +740,7 @@
   margin-bottom: -10px;
   user-select: none;
 }
+
 .q-hint {
   font-family: var(--font-mono);
   font-size: 0.6em;
@@ -619,6 +750,7 @@
   padding: 5px 9px;
   line-height: 1.5;
 }
+
 .progress-dots { display: flex; gap: 7px; margin-top: auto; }
 .progress-dot {
   width: 7px; height: 7px; border-radius: 50%;
@@ -628,7 +760,6 @@
 .progress-dot.done   { background: var(--tc); border-color: var(--tc); }
 .progress-dot.active { border-color: var(--tc); }
 
-/* Plot-Spalte */
 .ex-plot-col {
   display: flex;
   flex-direction: column;
@@ -636,6 +767,7 @@
   background: var(--col-surface);
   gap: 8px;
 }
+
 .plot-topbar {
   display: flex;
   justify-content: space-between;
@@ -663,7 +795,7 @@
   transition: color 0.15s, border-color 0.15s;
 }
 .plot-ctrl-btn:hover,
-.plot-ctrl-btn.active  { color: var(--tc); border-color: var(--tc-border); }
+.plot-ctrl-btn.active { color: var(--tc); border-color: var(--tc-border); }
 .plot-ctrl-btn.maximize { color: var(--tc); border-color: var(--tc-border); }
 
 .plot-box {
@@ -677,12 +809,20 @@
 .plot-box > div,
 .plot-box .plotly-graph-div,
 .plot-box svg.main-svg {
-  width:  100% !important;
+  width: 100% !important;
   height: 100% !important;
 }
-
-/* Vollbild-Plot Variante */
-.exercise-fullplot { display: grid; grid-template-rows: auto 1fr; height: 100%; }
+/* ══════════════════════════════════════════════════════════════
+   VARIANTE B — Vollbild-Plot mit fixer Fragen-Bar oben
+   ══════════════════════════════════════════════════════════════ */
+ 
+.exercise-fullplot {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+}
+ 
+/* Fragen-Chips als horizontale Bar */
 .ex-chips-bar {
   display: flex;
   align-items: center;
@@ -710,10 +850,32 @@
   transition: border-color 0.15s, color 0.15s, background 0.15s;
   cursor: default;
 }
-.ex-chip.done   { color: var(--col-ok); border-color: var(--col-ok); }
-.ex-chip.active { color: var(--tc); border-color: var(--tc-border); background: var(--tc-dim); }
-.ex-chip-input-group { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.ex-plot-fullwidth { display: flex; flex-direction: column; flex: 1; min-height: 0; background: #0a0908; }
+.ex-chip.done {
+  color: var(--col-ok);
+  border-color: var(--col-ok);
+}
+.ex-chip.active {
+  color: var(--tc);
+  border-color: var(--tc-border);
+  background: var(--tc-dim);
+}
+ 
+/* Antwort-Eingabe direkt in der Chips-Bar (rechts) */
+.ex-chip-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+ 
+/* Vollbild-Plot */
+.ex-plot-fullwidth {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: #0a0908;
+}
 .ex-plot-toolbar {
   display: flex;
   align-items: center;
@@ -723,69 +885,31 @@
   background: var(--col-surface);
   flex-shrink: 0;
 }
-.toolbar-sep { width: 1px; height: 14px; background: var(--col-border); margin: 0 2px; }
-.ex-plot-area { flex: 1; min-height: 0; position: relative; }
+.toolbar-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--col-border);
+  margin: 0 2px;
+}
+.ex-plot-area {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+/* Plotly füllt hier auch vollständig */
 .ex-plot-area > div,
 .ex-plot-area .plotly-graph-div,
 .ex-plot-area svg.main-svg {
   width:  100% !important;
   height: 100% !important;
 }
-
-
-/* ══════════════════════════════════════════════════════════════════
-   12. PLOTLY-CONTAINER
-   ══════════════════════════════════════════════════════════════════ */
-.plotly-fig {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  max-height: 95%;
-  overflow: hidden;
-  border: 1px solid var(--tc-border);
-  border-radius: 5px;
-  padding: 10px;
-  background: var(--col-surface);
-  box-sizing: border-box;
-}
-.plotly-fig > div,
-.plotly-fig .plotly-graph-div,
-.plotly-fig svg.main-svg {
-  width:  100% !important;
-  height: 100% !important;
-}
-.plot-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: var(--col-muted);
-  font-family: var(--font-mono);
-  font-size: 0.75em;
-  border: 1px dashed var(--col-border);
-  border-radius: 4px;
-}
-
-
-/* ══════════════════════════════════════════════════════════════════
-   13. PLACEHOLDER
-   ══════════════════════════════════════════════════════════════════ */
-.placeholder {
-  border: 1px dashed var(--tc-border);
-  border-radius: 5px;
-  padding: 18px 20px;
-  margin-top: 1em;
-  color: var(--col-muted);
-  font-size: 0.72em;
-  font-family: var(--font-mono);
-}
-
-
-/* ══════════════════════════════════════════════════════════════════
-   14. MAXIMIER-OVERLAY
-   ══════════════════════════════════════════════════════════════════ */
+ 
+ 
+/* ══════════════════════════════════════════════════════════════
+   MAXIMIER-OVERLAY  (einmal global einbinden)
+   Öffnen:   document.getElementById('plotMaxOverlay').classList.add('open')
+   Schließen: ...classList.remove('open')
+   ══════════════════════════════════════════════════════════════ */
 #plotMaxOverlay {
   display: none;
   position: fixed;
@@ -796,8 +920,10 @@
   justify-content: center;
 }
 #plotMaxOverlay.open { display: flex; }
+ 
 .max-window {
-  width: 92%; height: 88%;
+  width:  92%;
+  height: 88%;
   background: var(--col-surface);
   border: 1px solid var(--tc-border);
   border-radius: 5px;
@@ -830,101 +956,20 @@
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
 }
-.max-window-close:hover { color: var(--col-text); border-color: var(--col-muted); }
+.max-window-close:hover {
+  color: var(--col-text);
+  border-color: var(--col-muted);
+}
 .max-window-body {
   flex: 1;
   min-height: 0;
   background: #0a0908;
   position: relative;
 }
+/* Plotly im Overlay */
 .max-window-body > div,
 .max-window-body .plotly-graph-div,
 .max-window-body svg.main-svg {
   width:  100% !important;
   height: 100% !important;
-}
-
-
-/* ══════════════════════════════════════════════════════════════════
-   15. DESKTOP-OVERRIDES  (Viewport > 1180px)
-   Feintuning für große Bildschirme — überschreibt Basis-Werte
-   wo nötig.
-   ══════════════════════════════════════════════════════════════════ */
-@media screen and (min-width: 1181px) {
-
-  html { font-size: clamp(14px, 1.2vw, 22px); }
-
-  /* Reveal-Viewport füllt den ganzen Bildschirm */
-  .reveal, .reveal-viewport {
-    width:  100vw !important;
-    height: 100vh !important;
-  }
-
-  /* Slides dürfen nebeneinander existieren (Reveal kümmert sich ums Hiding) */
-  .reveal .slides {
-    width:  100% !important;
-    height: 100% !important;
-  }
-}
-
-  /* Inaktive Slides verstecken */
-  .reveal .slides section:not(.present):not(.past):not(.future) {
-    display: none !important;
-  }
-  
-  .reveal .slides section.past,
-  .reveal .slides section.future {
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-}
-
-
-/* ══════════════════════════════════════════════════════════════════
-   16. IPAD-FIXES  (Viewport ≤ 1180px)
-   iPad 7 im Querformat: 1080 × 810 CSS-px
-   iPad 7 im Hochformat:  810 × 1080 CSS-px
-   ══════════════════════════════════════════════════════════════════ */
-@media screen and (max-width: 1180px) {
-
-  /* Schriftgröße */
-  html { font-size: 15px; }
-
-  /* Reveal: kein falsches Transform-Centering */
-  .reveal {
-    left:   0 !important;
-    top:    0 !important;
-    width:  100% !important;
-    height: 100% !important;
-  }
-
-  /* Slides */
-  .reveal .slides {
-    left:     0 !important;
-    top:      0 !important;
-    width:    100% !important;
-    height:   100% !important;
-    overflow: hidden !important;
-  }
-
-  /* Body & Viewport: kein Scroll */
-  body, .reveal-viewport {
-    overflow: hidden !important;
-  }
-
-  /* Slides: position relative + GPU-Layer */
-  .reveal .slides section {
-    position: relative !important;
-    overflow: hidden !important;
-    -webkit-transform: translateZ(0);
-    transform:         translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility:         hidden;
-  }
-
-}
-
-/* iPad Hochformat */
-@media screen and (max-width: 900px) {
-  html { font-size: 13px; }
 }
