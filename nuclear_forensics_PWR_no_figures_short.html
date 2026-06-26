@@ -988,7 +988,8 @@ html { font-size: clamp(14px, 1.4vw, 28px); }
    14. iPAD-FIXES  (iPad 7, 1080×810 CSS-px Querformat)
    Greift bei max-width: 1180px — deckt Quer- und Hochformat ab.
    ══════════════════════════════════════════════════════════════════ */
-@media screen and (max-width: 1180px) {
+/*
+    @media screen and (max-width: 1180px) {
  
   /* Font-size: fixer Wert statt clamp()/vw */
   html { font-size: 15px; }
@@ -1021,7 +1022,6 @@ html { font-size: clamp(14px, 1.4vw, 28px); }
   .reveal .slides {
     left: 0 !important;
     top: 0 !important;
-    transform: none !important;
     width: 100% !important;
     height: 100% !important;
   }
@@ -1041,7 +1041,7 @@ html { font-size: clamp(14px, 1.4vw, 28px); }
     backface-visibility: hidden;
   }
 }
- 
+ */
 /* Hochformat iPad 7 (810px breit) */
 @media screen and (max-width: 900px) {
   html { font-size: 13px; }
@@ -1064,7 +1064,7 @@ html { font-size: clamp(14px, 1.4vw, 28px); }
         <div class="slide-layout">
           <div class="slide-header">
             <span class="section-badge badge-intro">Einführung</span>
-            <h2>Nukleare Forensik</h2>
+            <h2>Nukleare Forensik V9</h2>
           </div>
           <div class="slide-content">
             <img src="https://radiationphoenix.github.io/ForensicsExercisePublic/Bilder/nuclear forensics.jpg" alt="Nuclear Forensics"
