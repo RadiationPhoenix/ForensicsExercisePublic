@@ -1,0 +1,165 @@
+/* ── Variables (mirrors main presentation) ─────────────────── */
+:root {
+  --col-bg:        #0f0e0b;
+  --col-surface:   #1a1814;
+  --col-border:    rgba(255,255,255,0.08);
+  --col-gold:      #c8a84b;
+  --col-gold-dim:  rgba(200,168,75,0.15);
+  --col-blue:      #5b9bd5;
+  --col-blue-dim:  rgba(91,155,213,0.15);
+  --col-green:     #6bbf9a;
+  --col-green-dim: rgba(107,191,154,0.1);
+  --col-muted:     #7a7265;
+  --col-text:      #e8e2d4;
+  --col-text-dim:  #a09880;
+
+  --alpha-col:     #e8845a;
+  --beta-col:      #5b9bd5;
+  --gamma-col:     #6bbf9a;
+  --nr-col:        #a07cd0;
+
+  --font-serif:    'Georgia', serif;
+  --font-mono:     'Courier New', monospace;
+  --radius:        6px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--col-bg);
+  color: var(--col-text);
+  font-family: var(--font-serif);
+  min-height: 100vh;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.page-header .badge {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  letter-spacing: 0.15em;
+  color: var(--col-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.page-header h1 {
+  font-size: 2em;
+  color: var(--col-gold);
+  letter-spacing: 0.04em;
+  font-weight: normal;
+}
+.page-header p {
+  color: var(--col-muted);
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+
+/* ── Section title ─────────────────────────────────────────── */
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  letter-spacing: 0.12em;
+  color: var(--col-muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-left: 4px;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* ── Scenario cards ────────────────────────────────────────── */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+
+.scenario-card {
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius);
+  background: var(--col-surface);
+  overflow: hidden;
+}
+
+.scenario-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--col-border);
+}
+.scenario-card .card-title {
+  font-size: 1em;
+  color: var(--col-gold);
+  letter-spacing: 0.04em;
+}
+.scenario-card .card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  color: var(--col-muted);
+  letter-spacing: 0.1em;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 0;
+}
+
+.card-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  letter-spacing: 0.08em;
+  color: var(--col-text-dim);
+  border-right: 1px solid var(--col-border);
+  transition: background 0.18s, color 0.18s;
+}
+.card-btn:last-child { border-right: none; }
+.card-btn:hover { background: var(--col-gold-dim); color: var(--col-gold); }
+.card-btn.local:hover  { background: var(--col-blue-dim);  color: var(--col-blue); }
+.card-btn.dl:hover     { background: var(--col-green-dim); color: var(--col-green); }
+.card-btn.solution:hover { background: rgba(160,124,208,0.12); color: var(--nr-col); }
+.card-btn .btn-icon { font-size: 1.1em; }
+
+/* ── Teacher mapping table ─────────────────────────────────── */
+.mapping-table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin-bottom: 48px;
+  font-size: 0.85em;
+}
+.mapping-table th {
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  letter-spacing: 0.1em;
+  color: var(--col-muted);
+  text-transform: uppercase;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--col-border);
+}
+.mapping-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--col-border);
+  color: var(--col-text-dim);
+}
+.mapping-table td:first-child { color: var(--col-gold); }
+.mapping-table tr:last-child td { border-bottom: none; }
