@@ -5,4 +5,4 @@ https://radiationphoenix.github.io/ForensicsExercisePublic/nuclear_forensics_PWR
 
 
 
-https://radiationphoenix.github.io/ForensicsExercisePublic/index_teacher.html
+https://radiationphoenix.github.io/ForensicsExercisePublic/index_tutor.html
