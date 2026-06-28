@@ -1,117 +1,53 @@
-@import url('index_styles.css');
-
-/* ── Solution page specifics ───────────────────────────────── */
-.solution-header {
+/* ── Comparison table ──────────────────────────────────────── */
+.answer-table {
   width: 100%;
-  max-width: 800px;
-  margin-bottom: 40px;
-}
-.reactor-badge {
-  font-family: var(--font-mono);
-  font-size: 0.65em;
-  letter-spacing: 0.15em;
-  color: var(--col-muted);
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.reactor-title {
-  font-size: 1.6em;
-  color: var(--col-gold);
-  font-weight: normal;
-  letter-spacing: 0.04em;
+  border-collapse: collapse;
+  font-size: 0.82em;
+  table-layout: fixed;
 }
 
-/* ── Input params block ────────────────────────────────────── */
-.params-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 40px;
+.answer-table th, .answer-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--col-border);
+  border-right: 1px solid var(--col-border);
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
 }
-.param-card {
-  background: var(--col-surface);
-  border: 1px solid var(--col-border);
-  border-radius: var(--radius);
-  padding: 12px 16px;
+.answer-table th:last-child,
+.answer-table td:last-child {
+  border-right: none;
 }
-.param-label {
+
+.answer-table th {
   font-family: var(--font-mono);
-  font-size: 0.6em;
+  font-size: 0.7em;
   letter-spacing: 0.1em;
   color: var(--col-muted);
   text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.param-value {
-  font-size: 0.95em;
-  color: var(--col-text);
-}
-
-/* ── Answer sections ───────────────────────────────────────── */
-.answer-section {
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 32px;
-  border: 1px solid var(--col-border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.answer-section-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
-  border-bottom: 1px solid var(--col-border);
-}
-.answer-section-header .section-icon {
-  font-size: 1.1em;
-}
-.answer-section-header .section-name {
-  font-family: var(--font-mono);
-  font-size: 0.75em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--col-text-dim);
-}
-
-/* Theme colors per section */
-.answer-section.alpha .answer-section-header { background: rgba(232,132,90,0.08);  border-color: rgba(232,132,90,0.2); }
-.answer-section.alpha .section-icon          { color: var(--alpha-col); }
-.answer-section.beta  .answer-section-header { background: rgba(91,155,213,0.08);  border-color: rgba(91,155,213,0.2); }
-.answer-section.beta  .section-icon          { color: var(--beta-col); }
-.answer-section.gamma .answer-section-header { background: rgba(107,191,154,0.08); border-color: rgba(107,191,154,0.2); }
-.answer-section.gamma .section-icon          { color: var(--gamma-col); }
-.answer-section.nr    .answer-section-header { background: rgba(160,124,208,0.08); border-color: rgba(160,124,208,0.2); }
-.answer-section.nr    .section-icon          { color: var(--nr-col); }
-
-/* ── Answer rows ───────────────────────────────────────────── */
-.answer-row {
-  display: flex;
-  gap: 16px;
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--col-border);
-}
-.answer-row:last-child { border-bottom: none; }
-.answer-row.question {
   background: rgba(255,255,255,0.03);
-  padding-top: 14px;
 }
-.answer-key {
-  font-family: var(--font-mono);
-  font-size: 0.72em;
-  color: var(--col-muted);
-  min-width: 200px;
-  padding-top: 2px;
-}
-.answer-val {
-  font-size: 0.85em;
-  color: var(--col-text);
-  flex: 1;
-}
-.answer-row.question .answer-val {
+
+/* Alternating column backgrounds for reactor cols */
+.answer-table td:nth-child(2),
+.answer-table th:nth-child(2) { background: rgba(255,255,255,0.02); }
+.answer-table td:nth-child(3),
+.answer-table th:nth-child(3) { background: rgba(255,255,255,0.04); }
+.answer-table td:nth-child(4),
+.answer-table th:nth-child(4) { background: rgba(255,255,255,0.02); }
+.answer-table td:nth-child(5),
+.answer-table th:nth-child(5) { background: rgba(255,255,255,0.04); }
+
+.key-col     { width: 22%; }
+.reactor-col { width: auto; }
+
+.answer-key  { color: var(--col-muted); font-family: var(--font-mono); font-size: 0.75em; }
+.answer-val  { color: var(--col-text); }
+
+.question-row { background: rgba(255,255,255,0.03) !important; }
+.question-cell {
   color: var(--col-gold);
   font-style: italic;
+  font-size: 0.8em;
+  padding: 12px 14px 8px;
 }
