@@ -1,3 +1,102 @@
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --col-bg:        #0f0e0b;
+  --col-surface:   #1a1814;
+  --col-border:    rgba(255,255,255,0.08);
+  --col-gold:      #c8a84b;
+  --col-text:      #e8e2d4;
+  --col-text-dim:  #a09880;
+  --col-muted:     #7a7265;
+
+  --alpha-col:     #e8845a;
+  --beta-col:      #5b9bd5;
+  --gamma-col:     #d4cfc8;
+  --nr-col:        #6bbf9a;
+
+  --font-serif:    'Georgia', serif;
+  --font-mono:     'Courier New', monospace;
+  --radius:        6px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--col-bg);
+  color: var(--col-text);
+  font-family: var(--font-serif);
+  min-height: 100vh;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Page header ───────────────────────────────────────────── */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+.page-header .badge {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  letter-spacing: 0.15em;
+  color: var(--col-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.page-header h1 {
+  font-size: 2em;
+  color: var(--col-gold);
+  letter-spacing: 0.04em;
+  font-weight: normal;
+}
+.page-header p {
+  color: var(--col-muted);
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+
+/* ── Answer sections ───────────────────────────────────────── */
+.answer-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 32px;
+  border: 1px solid var(--col-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.answer-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--col-border);
+}
+.answer-section-header .section-icon {
+  font-size: 1.1em;
+}
+.answer-section-header .section-name {
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--col-text-dim);
+}
+
+/* Theme colors per section */
+.answer-section.alpha .answer-section-header { background: rgba(232,132,90,0.08);  border-color: rgba(232,132,90,0.2); }
+.answer-section.alpha .section-icon          { color: var(--alpha-col); }
+.answer-section.beta  .answer-section-header { background: rgba(91,155,213,0.08);  border-color: rgba(91,155,213,0.2); }
+.answer-section.beta  .section-icon          { color: var(--beta-col); }
+.answer-section.gamma .answer-section-header { background: rgba(212,207,200,0.08); border-color: rgba(212,207,200,0.2); }
+.answer-section.gamma .section-icon          { color: var(--gamma-col); }
+.answer-section.nr    .answer-section-header { background: rgba(107,191,154,0.08); border-color: rgba(107,191,154,0.2); }
+.answer-section.nr    .section-icon          { color: var(--nr-col); }
+
 /* ── Comparison table ──────────────────────────────────────── */
 .answer-table {
   width: 100%;
